@@ -8,7 +8,8 @@ except ModuleNotFoundError:
     subprocess.call([sys.executable, "-m", "pip", "install", 'xmltodict'])
     import xmltodict
 
-inputType = int(input('Select input type :\n1 : text\n2 : xml file\n'))
+inputType = int(
+    input('Select input type :\n1 : text\n2 : xml file\n3 : exit program\n'))
 
 if inputType == 1:
     text = []
@@ -38,6 +39,8 @@ if inputType == 2:
         except FileNotFoundError:
             print('File not found. Please try again')
 
+if inputType == 3:
+    exit(0)
 with open(inputFileName.replace('.xml', '.json'), 'w') as write_file:
     json.dump(doc, write_file)
 
