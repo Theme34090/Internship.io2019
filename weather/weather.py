@@ -1,11 +1,18 @@
 import json
-import xmltodict
+
+try:
+    import xmltodict
+except ModuleNotFoundError:
+    import subprocess
+    import sys
+    subprocess.call([sys.executable, "-m", "pip", "install", 'xmltodict'])
+    import xmltodict
 
 inputType = int(input('Select input type :\n1 : text\n2 : xml file\n'))
 
 if inputType == 1:
     text = []
-    print('** After finish entering input please press ENTER **')
+    print('** After finish entering input please press ENTER again **')
     print('Enter your xml text :')
     while True:
         line = str(input())
