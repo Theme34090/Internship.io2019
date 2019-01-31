@@ -1,6 +1,6 @@
 import json
 import random
-
+import os
 
 class Round:
     score = 0
@@ -21,7 +21,8 @@ class Round:
         self.count = 8
         tmp = []
         for i in word:
-            if i.lower() not in tmp and i.isalpha(): tmp.append(i.lower())
+            if i.lower() not in tmp and i.isalpha():
+                tmp.append(i.lower())
         self.remaining_letters = len(tmp)
         self.unique_letter = tmp
 
@@ -39,8 +40,8 @@ class Round:
             if i not in wrong_guessed:
                 wrong_guessed += i + ' ,'
         return out.strip() + '   score: ' + str(self.score) \
-               + ' , remaining guess: ' + str(self.count) \
-               + ' , wrong guessed: ' + wrong_guessed.strip(', ')
+            + ' , remaining guess: ' + str(self.count) \
+            + ' , wrong guessed: ' + wrong_guessed.strip(', ')
 
     def check_answer(self, ans):
         ans = ans.lower()
@@ -63,7 +64,8 @@ class Round:
     def get_hint(self, level):
         try:
             hint = self.hints[level]
-            if level != 0: self.score -= len(self.word) / 3
+            if level != 0:
+                self.score -= len(self.word) / 3
             return hint
         except IndexError:
             print('No more hint!')
@@ -74,9 +76,12 @@ class Round:
 
 
 def check_valid(ans):
-    if ans == 'exit': exit()
-    if ans == 'restart': return 'restart'
-    if ans == 'hint': return 'hint'
+    if ans == 'exit':
+        exit()
+    if ans == 'restart':
+        return 'restart'
+    if ans == 'hint':
+        return 'hint'
     if (not ans.isalpha()) or len(ans) > 1:
         print('Please enter valid answer')
         return False
@@ -100,8 +105,20 @@ def select_category():
 
 
 # main program
-with open("words.json", "r") as read_file:
-    words = json.load(read_file)
+'''
+try:
+    with open("words.json", "r") as read_file:
+        words = json.load(read_file)
+except FileNotFoundError:
+    print('words.json not found! please try again.')
+    exit()
+'''
+words = {}
+for filename in os.listdir(os.getcwd()):
+    if '.json' in filename:
+        with open(filename, "r") as read_file:
+            tmp = json.load(read_file)
+            words.update(tmp)
 print("Welcome to Hangman\n\n"
       "Available command\n"
       "- 'hint' : get a hint\n"
@@ -128,7 +145,8 @@ while True:
                 print('\nRun out of word! please select another category.')
                 category_complete = True
                 break
-        if category_complete: break  # only reset category
+        if category_complete:
+            break  # only reset category
         # Round start
         rnd = Round(word, selected_category[word], total_score)
         hint_level = 1
@@ -145,7 +163,8 @@ while True:
                 break
             elif valid == 'hint':
                 hint = rnd.get_hint(hint_level)
-                if hint: print('Hint : ' + hint)
+                if hint:
+                    print('Hint : ' + hint)
                 hint_level += 1
             elif not valid:
                 continue
@@ -159,7 +178,8 @@ while True:
                 total_score = total_score // 1
                 print("Total score : " + str(total_score))
                 break
-        if rnd.remaining_letters == 0: continue
+        if rnd.remaining_letters == 0:
+            continue
         if reset_game:
             selected_category = select_category()
             total_score = 0

@@ -1,0 +1,19 @@
+{
+  "Land animal": {
+    "aardvark": [
+      "Earth Pig", "Have long nose", "Eat ants"
+    ],
+    "chimpanzee": [
+      "Closely related to Human", "Able to climb trees", "Eat bananas"
+    ],
+    "hedgehog": [
+      "CUTE!", "SPIKEY!", "Sonic?"
+    ],
+    "komodo dragon": [
+      "Cold-blooded animal", "Some kind of Dragon", "Here"
+    ],
+    "ostrich": [
+      "Have large egg", "Largest bird", "Run fast"
+    ]
+  }
+}
