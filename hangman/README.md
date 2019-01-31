@@ -25,3 +25,6 @@
 - guessing letter that have already been guessed will deduct score equal to length of word.
 - score can be deducted to below 0.
 - after finish each round, score will be kept.
+
+## Source
+[Open multiple file in same directory](https://stackoverflow.com/questions/18262293/how-to-open-every-file-in-a-folder)
